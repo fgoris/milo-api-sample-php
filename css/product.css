@@ -1,6 +1,36 @@
 .hidden {
     display: none;
 }
+#pimg {
+    text-align: center;
+    padding: 12px;
+}
+#pimg img {
+    border: 1px solid #99851f;
+}
+#avail_title {
+    margin: 12px 0 0;
+}
 #avail {
     display: none;
+}
+#avail table th,
+#avail table td {
+    padding: 3px;
+    border: 1px solid #99851f;
+}
+#avail table td {
+    font-size: 12px;
+}
+#avail table th {
+    font-weight: bold;
+    background-color: #ffdd33;
+}
+#avail td.av,
+#avail td.name {
+    white-space: nowrap;
+}
+#avail td.av,
+#avail td.price {
+    text-align: right;
 }

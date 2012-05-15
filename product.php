@@ -6,10 +6,16 @@ $url .= "&show=DescImg200";
 $api_response = file_get_contents($url);
 if ($api_response) {
     $results = json_decode($api_response, true);
-    $product = $results['products'][0];
+    if (count($results['products']) > 0) {
+        $product = $results['products'][0];
+    } else {
+        $product = array(
+            'name' => 'Invalid Product ID'
+        );
+    }
 } else {
     $product = array(
-        'name' => 'Invalid Product ID'
+        'name' => 'Error'
     );
 }
 ?><!doctype html>
@@ -17,6 +23,7 @@ if ($api_response) {
 <head>
     <meta charset="utf-8">
     <title>Local Shopper : <?php echo $product['name']; ?></title>
+    <link rel="stylesheet" href="css/common.css" type="text/css" />
     <link rel="stylesheet" href="css/product.css" type="text/css" />
 </head>
 <body>
@@ -24,20 +31,26 @@ if ($api_response) {
 <?php
 if (isset($product['description'])) {
 ?>
-<img class="pimg" src="<?php echo $product['image_200']; ?>" />
-<div class="pdesc">
-<?php echo $product['description']; ?>
+<div id="main">
+    <div id="pimg" class="container top">
+        <img src="<?php echo $product['image_200']; ?>" />
+    </div>
+    <div id="pdesc" class="container bottom">
+        <?php echo $product['description']; ?>
+    </div>
+    <h2 id="avail_title" class="container top">Availability</h2>
+    <div id="spinner" class="container bottom">Checking availability...</div>
+    <div id="avail" class="container bottom">
+        <table>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Price</th>
+                <th>Store</th>
+                <th>Address</th>
+            </tr>
+        </table>
+    </div>
 </div>
-<h2 id="avail_title">Availability</h2>
-<div id="spinner">Checking availability...</div>
-<table id="avail">
-    <tr>
-        <th>&nbsp;</th>
-        <th>Price</th>
-        <th>Store</th>
-        <th>Address</th>
-    </tr>
-</table>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 var merchants = {},
@@ -77,8 +90,8 @@ function newAvailability(result) {
     if (availabilities[result.location_id]) {
         $("#av" + result.location_id).text = availability;
     } else {
-        var newRow = $('<tr><td id="av' + result.location_id + '">' + availability + "</td><td>$" + centsToDollars(result.price) + "</td><td>" + merchant.name + "</td><td>" + store.street + ", " + store.city + "</td></tr>");
-        $("#avail").append(newRow);
+        var newRow = $('<tr><td id="av' + result.location_id + '" class="av">' + availability + '</td><td class="price">$' + centsToDollars(result.price) + '</td><td class="name">' + merchant.name + '</td><td class="addr">' + store.street + ", " + store.city + "</td></tr>");
+        $("#avail table tr:last").after(newRow);
     }
     availabilities[result.location_id] = availability;
     $("#spinner").hide();

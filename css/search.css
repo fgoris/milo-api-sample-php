@@ -1,0 +1,19 @@
+#summary {
+    font-weight: bold;
+}
+#results {
+    padding: 0;
+}
+.product {
+    padding: 12px;
+    border-bottom: 1px solid #4d420f;
+    height: 100px;
+}
+.product img {
+    border: 1px solid #99851f;
+    margin-right: 12px;
+    float: left;
+}
+.product .title {
+    line-height: 1.2;
+}

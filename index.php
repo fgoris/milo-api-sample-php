@@ -5,22 +5,25 @@ include 'settings.php';
 <head>
     <meta charset="utf-8">
     <title>Local Shopper</title>
+    <link rel="stylesheet" href="css/common.css" type="text/css" />
     <link rel="stylesheet" href="css/index.css" type="text/css" />
 </head>
 <body>
 <h1>Local Shopper</h1>
-<form action="search.php">
-    <label for="keywords">Search for:</label>
-    <input id="keywords" type="text" name="keywords" disabled="disabled" />
-    <input type="submit" value="Search" disabled="disabled" />
-    <input id="latitude" type="hidden" name="latitude" value="" />
-    <input id="longitude" type="hidden" name="longitude" value="" />
-    <input id="location" type="hidden" name="location" value="" />
-</form>
-<p>We'll search these stores within <?php echo RADIUS ?> miles of <span id="address">your location</span>:</p>
-<div id="spinner">Determining location...</div>
-<ul id="stores">
-</ul>
+<div id="main">
+    <form action="search.php" class="container">
+        <label for="keywords">Search for:</label>
+        <input id="keywords" type="text" name="keywords" disabled="disabled" />
+        <input type="submit" value="Search" disabled="disabled" />
+        <input id="latitude" type="hidden" name="latitude" value="" />
+        <input id="longitude" type="hidden" name="longitude" value="" />
+        <input id="location" type="hidden" name="location" value="" />
+    </form>
+    <p id="stores_message" class="container top">We'll search these stores within <?php echo RADIUS ?> miles of <span id="address">your location</span>:</p>
+    <div id="spinner" class="container bottom">Determining location...</div>
+    <ul id="stores" class="container bottom">
+    </ul>
+</div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
