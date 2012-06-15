@@ -1,0 +1,3 @@
+This is a sample PHP application that uses the Milo API.
+
+Don't forget to change "your_key_here" in settings.php to your API key.
